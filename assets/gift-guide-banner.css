@@ -1,0 +1,292 @@
+/* ==========================================================================
+   Gift Guide banner
+   Styles for sections/gift-guide-banner.liquid. Written from scratch.
+   Breakpoint: 750px is the desktop / mobile divide (matches Dawn).
+   ========================================================================== */
+
+.gg-banner {
+  --gg-bar-padding-x: 40px;
+  position: relative;
+  color: var(--gg-text, #1a1a1a);
+  font-family: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Shared button
+   Default: black fill, white text. Hover: swaps to the accent colour and the
+   arrow slides right. The accent modifier starts on the accent colour and
+   swaps to black on hover (the two buttons mirror each other).
+   -------------------------------------------------------------------------- */
+.gg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 26px;
+  border: 0;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gg-btn__arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.gg-btn:hover,
+.gg-btn:focus-visible {
+  background: var(--gg-accent, #f2ea00);
+  color: #000;
+}
+
+.gg-btn:hover .gg-btn__arrow,
+.gg-btn:focus-visible .gg-btn__arrow {
+  transform: translateX(6px);
+}
+
+.gg-btn--accent {
+  background: var(--gg-accent, #f2ea00);
+  color: #000;
+}
+
+.gg-btn--accent:hover,
+.gg-btn--accent:focus-visible {
+  background: #000;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   1. Top bar
+   -------------------------------------------------------------------------- */
+.gg-banner__bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px var(--gg-bar-padding-x);
+  background: var(--gg-topbar-bg, #ededed);
+}
+
+.gg-banner__logo {
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.gg-banner__collapse {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.gg-banner__tagline {
+  flex: 1 1 auto;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+}
+
+.gg-banner__topbar-cta {
+  flex: 0 0 auto;
+}
+
+/* Hamburger toggle, hidden on desktop */
+.gg-banner__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.gg-banner__toggle-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. Hero
+   -------------------------------------------------------------------------- */
+.gg-banner__hero {
+  position: relative;
+  min-height: var(--gg-hero-min-height, 640px);
+  background: #fff;
+  overflow: hidden;
+}
+
+.gg-banner__media {
+  position: absolute;
+  inset: 0;
+}
+
+.gg-banner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gg-banner__content {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 72px var(--gg-bar-padding-x) 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.gg-banner__heading {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.gg-banner__text {
+  max-width: 340px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.gg-banner__text > * {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Strip
+   -------------------------------------------------------------------------- */
+.gg-banner__strip {
+  margin: 0;
+  padding: 12px 20px;
+  background: var(--gg-topbar-bg, #ededed);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile
+   Top bar collapses to: hamburger | centred logo. The tagline and button move
+   into a panel that drops down when the toggle is pressed. The hero stacks
+   text above the illustration and the button overlaps the top of the image.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .gg-banner {
+    --gg-bar-padding-x: 20px;
+  }
+
+  .gg-banner__bar {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+    gap: 0;
+  }
+
+  .gg-banner__toggle {
+    display: flex;
+    grid-column: 1;
+  }
+
+  .gg-banner__logo {
+    grid-column: 2;
+    text-align: center;
+  }
+
+  .gg-banner__collapse {
+    grid-column: 1 / -1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 5;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: var(--gg-topbar-bg, #ededed);
+    display: none;
+  }
+
+  .gg-banner__collapse.is-open {
+    display: flex;
+  }
+
+  .gg-banner__tagline {
+    text-align: center;
+  }
+
+  .gg-banner__topbar-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Toggle turns into a cross while the panel is open */
+  .gg-banner__toggle[aria-expanded='true'] .gg-banner__toggle-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .gg-banner__toggle[aria-expanded='true'] .gg-banner__toggle-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .gg-banner__toggle[aria-expanded='true'] .gg-banner__toggle-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .gg-banner__hero {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gg-banner__media {
+    position: relative;
+    inset: auto;
+    order: 2;
+  }
+
+  .gg-banner__image {
+    height: auto;
+  }
+
+  .gg-banner__content {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    padding: 32px 20px 0;
+  }
+
+  .gg-banner__heading {
+    font-size: 34px;
+  }
+
+  .gg-banner__text {
+    max-width: 320px;
+  }
+
+  /* Pull the button down so it sits over the top edge of the illustration */
+  .gg-banner__hero-cta {
+    position: relative;
+    z-index: 3;
+    margin-bottom: -28px;
+  }
+}
