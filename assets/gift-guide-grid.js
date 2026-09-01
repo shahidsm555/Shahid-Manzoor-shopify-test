@@ -160,6 +160,12 @@
     if (!productUrl) return;
     var self = this;
 
+    // Move the popup to <body> so it is never trapped inside a section's
+    // stacking or transform context (the fixed overlay must cover the viewport).
+    if (this.popup.parentElement !== document.body) {
+      document.body.appendChild(this.popup);
+    }
+
     this.lastFocused = document.activeElement;
     this.popup.hidden = false;
     document.body.style.overflow = 'hidden';

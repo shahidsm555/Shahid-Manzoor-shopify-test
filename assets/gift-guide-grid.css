@@ -79,21 +79,25 @@
 .gg-popup {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+  overscroll-behavior: contain;
 }
 
 .gg-popup[hidden] {
   display: none;
 }
 
+/* Full-bleed click target for dismissing; the dim colour lives on .gg-popup */
 .gg-popup__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
+  cursor: pointer;
 }
 
 .gg-popup__dialog {
