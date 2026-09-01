@@ -321,18 +321,19 @@
       var select = el('select', 'gg-select');
       select.setAttribute('aria-label', option.name);
 
-      // The design shows a "Choose your size" prompt.
+      // The design shows a "Choose your <option>" prompt until a value is picked.
       var prompt = el('option', null, 'Choose your ' + option.name.toLowerCase());
       prompt.value = '';
-      prompt.disabled = true;
       select.appendChild(prompt);
 
       option.values.forEach(function (value) {
         var opt = el('option', null, value);
         opt.value = value;
-        if (value === selection[option.position]) opt.selected = true;
         select.appendChild(opt);
       });
+
+      // Keep the visible value in step with our state (empty = show the prompt).
+      select.value = selection[option.position] || '';
 
       select.addEventListener('change', function () {
         selection[option.position] = select.value;
@@ -377,29 +378,40 @@
     }
 
     if (addButton) {
-      var hasUnpicked = Object.keys(selection).some(function (position) {
-        return !selection[position];
+      // The design keeps the button labelled "Add to cart" at all times; it is
+      // only dimmed when a fully chosen variant is sold out. Incomplete choices
+      // are handled with a message on click (see addToCart).
+      var complete = Object.keys(selection).every(function (position) {
+        return selection[position];
       });
-
-      addButton.disabled = !variant || !variant.available;
-
-      var label = 'Add to cart';
-      if (hasUnpicked) label = 'Select options';
-      else if (!variant) label = 'Unavailable';
-      else if (!variant.available) label = 'Sold out';
-
-      addButton.firstChild.textContent = label;
+      addButton.disabled = complete && variant && !variant.available;
+      addButton.firstChild.textContent =
+        complete && variant && !variant.available ? 'Sold out' : 'Add to cart';
     }
   };
 
   /* ---- add to cart -------------------------------------------------- */
   GiftGuideGrid.prototype.addToCart = function () {
     var self = this;
+    var selection = this.active.options;
     var variant = this.currentVariant();
     var status = this.popupBody.querySelector('.gg-popup__status');
     var addButton = this.popupBody.querySelector('[data-gg-add]');
 
-    if (!variant || !variant.available) return;
+    var missing = this.active.optionMeta.filter(function (option) {
+      return !selection[option.position];
+    });
+    if (missing.length) {
+      status.textContent = 'Please choose a ' + missing[0].name.toLowerCase() + '.';
+      status.classList.add('gg-popup__status--error');
+      return;
+    }
+
+    if (!variant || !variant.available) {
+      status.textContent = 'That combination is unavailable.';
+      status.classList.add('gg-popup__status--error');
+      return;
+    }
 
     addButton.disabled = true;
     status.textContent = 'Adding...';
