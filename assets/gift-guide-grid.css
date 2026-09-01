@@ -98,7 +98,7 @@
 
 .gg-popup__dialog {
   position: relative;
-  width: min(680px, 100%);
+  width: min(560px, 100%);
   max-height: 90vh;
   overflow-y: auto;
   padding: 28px;
@@ -107,48 +107,56 @@
 
 .gg-popup__close {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 14px;
+  right: 16px;
   border: 0;
   background: none;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
 }
 
-.gg-popup__layout {
+/* Top row: image + name/price/description */
+.gg-popup__top {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 22px;
+  grid-template-columns: 132px 1fr;
+  gap: 20px;
+  margin-bottom: 22px;
 }
 
 .gg-popup__media img {
   width: 100%;
   display: block;
+  object-fit: cover;
 }
 
 .gg-popup__title {
   margin: 0 0 6px;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 500;
 }
 
 .gg-popup__price {
-  margin: 0 0 14px;
-  font-size: 16px;
+  margin: 0 0 12px;
+  font-size: 15px;
 }
 
 .gg-popup__description {
-  margin: 0 0 18px;
-  font-size: 13px;
+  margin: 0;
+  font-size: 12px;
   line-height: 1.55;
+  color: #444;
 }
 
 .gg-popup__description * {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
-/* Variant controls */
+/* Full-width variant controls + button */
+.gg-popup__form {
+  display: block;
+}
+
 .gg-field {
   margin-bottom: 16px;
 }
@@ -185,15 +193,17 @@
 
 .gg-select {
   width: 100%;
-  padding: 12px;
+  padding: 13px 44px 13px 14px;
   border: 1px solid #000;
   border-radius: 0;
-  background: #fff;
+  background-color: #fff;
   font-size: 13px;
+  color: #000;
+  -webkit-appearance: none;
   appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, #000 50%),
     linear-gradient(135deg, #000 50%, transparent 50%);
-  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-position: calc(100% - 22px) center, calc(100% - 17px) center;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
 }
@@ -266,11 +276,12 @@
     text-align: center;
   }
 
-  .gg-popup__layout {
-    grid-template-columns: 1fr;
+  .gg-popup__dialog {
+    padding: 22px;
   }
 
-  .gg-popup__media {
-    max-width: 200px;
+  .gg-popup__top {
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
   }
 }

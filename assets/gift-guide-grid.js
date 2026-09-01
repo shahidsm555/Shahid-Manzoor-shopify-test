@@ -229,10 +229,11 @@
     this.active = { product: product, options: selection, optionMeta: options };
 
     this.popupBody.innerHTML = '';
+    var self = this;
 
-    var layout = el('div', 'gg-popup__layout');
+    // --- Top row: image on the left, name / price / description on the right ---
+    var top = el('div', 'gg-popup__top');
 
-    // Media
     var media = el('div', 'gg-popup__media');
     if (product.featured_image) {
       var img = el('img');
@@ -241,27 +242,30 @@
       img.loading = 'lazy';
       media.appendChild(img);
     }
-    layout.appendChild(media);
+    top.appendChild(media);
 
-    // Details
-    var details = el('div', 'gg-popup__details');
+    var info = el('div', 'gg-popup__info');
     var title = el('h3', 'gg-popup__title', product.title);
     title.id = this.dialog.getAttribute('aria-labelledby');
-    details.appendChild(title);
+    info.appendChild(title);
 
     var price = el('p', 'gg-popup__price');
     price.setAttribute('data-gg-price', '');
-    details.appendChild(price);
+    info.appendChild(price);
 
     if (product.description) {
       var description = el('div', 'gg-popup__description');
       description.innerHTML = product.description;
-      details.appendChild(description);
+      info.appendChild(description);
     }
+    top.appendChild(info);
+    this.popupBody.appendChild(top);
 
-    var self = this;
+    // --- Full-width form: variant controls + add to cart ---
+    var form = el('div', 'gg-popup__form');
+
     options.forEach(function (option) {
-      details.appendChild(self.buildOptionControl(option, selection));
+      form.appendChild(self.buildOptionControl(option, selection));
     });
 
     var addButton = el('button', 'gg-popup__add');
@@ -272,12 +276,10 @@
     addButton.addEventListener('click', function () {
       self.addToCart();
     });
-    details.appendChild(addButton);
+    form.appendChild(addButton);
 
-    details.appendChild(el('p', 'gg-popup__status', ''));
-
-    layout.appendChild(details);
-    this.popupBody.appendChild(layout);
+    form.appendChild(el('p', 'gg-popup__status', ''));
+    this.popupBody.appendChild(form);
 
     this.updateVariantState();
 
