@@ -121,9 +121,14 @@
 
 /* --------------------------------------------------------------------------
    2. Hero
+   The illustration is shown at its natural aspect ratio across the full width
+   (as in the Figma frame). The copy is layered on top, pinned to the left and
+   vertically centred, with a soft white wash behind it so it stays readable
+   over the line art.
    -------------------------------------------------------------------------- */
 .gg-banner__hero {
   position: relative;
+  display: flex;
   min-height: var(--gg-hero-min-height, 640px);
   background: #fff;
   overflow: hidden;
@@ -135,6 +140,7 @@
 }
 
 .gg-banner__image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -144,13 +150,36 @@
 .gg-banner__content {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 72px var(--gg-bar-padding-x) 96px;
+  padding: 0 var(--gg-bar-padding-x);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
   gap: 24px;
+}
+
+/* White wash so the heading and paragraph read over the artwork */
+.gg-banner__content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  background: radial-gradient(
+    120% 80% at 20% 50%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.75) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.gg-banner__content > * {
+  position: relative;
 }
 
 .gg-banner__heading {
@@ -161,7 +190,7 @@
 }
 
 .gg-banner__text {
-  max-width: 340px;
+  max-width: 360px;
   font-size: 15px;
   line-height: 1.6;
 }
@@ -270,9 +299,14 @@
 
   .gg-banner__content {
     order: 1;
+    position: static;
     align-items: center;
     text-align: center;
     padding: 32px 20px 0;
+  }
+
+  .gg-banner__content::before {
+    display: none;
   }
 
   .gg-banner__heading {
