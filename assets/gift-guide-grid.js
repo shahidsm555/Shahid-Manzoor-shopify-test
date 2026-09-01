@@ -216,17 +216,13 @@
   GiftGuideGrid.prototype.renderProduct = function (product) {
     var options = normalizeOptions(product);
 
-    // Default selection: colour picks the first available variant's value,
-    // the size dropdown starts empty so it shows "Choose your size" (matches
-    // the Figma design).
-    var firstVariant =
-      product.variants.filter(function (v) { return v.available; })[0] ||
-      product.variants[0];
-
+    // Default selection: colour shows its first value pre-selected (as in the
+    // Figma design); the size dropdown starts empty so it reads "Choose your
+    // size" until the shopper picks one.
     var selection = {};
     options.forEach(function (option) {
       selection[option.position] = COLOR_OPTION.test(option.name)
-        ? firstVariant['option' + option.position]
+        ? option.values[0]
         : '';
     });
 
