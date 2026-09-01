@@ -1,18 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "gift_guide_banner": {
       "type": "gift-guide-banner",
-      "settings": {}
+      "settings": {
+        "logo_text": "TISSO VISON",
+        "topbar_text": "Find the ideal gift for your loved ones.",
+        "topbar_button_label": "CHOOSE GIFT",
+        "topbar_button_link": "",
+        "background_image": "shopify://shop_images/Group_1000008197.png",
+        "heading": "The Gift Guide",
+        "body_text": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>",
+        "hero_button_label": "SHOP NOW",
+        "hero_button_link": "",
+        "hero_min_height": 640,
+        "strip_text": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL",
+        "topbar_background": "#ededed",
+        "accent_color": "#f2ea00",
+        "text_color": "#1a1a1a"
+      }
     },
     "gift_guide_grid": {
       "type": "gift-guide-grid",
       "blocks": {
-        "product_1": { "type": "product", "settings": { "hotspot_horizontal": 62, "hotspot_vertical": 68 } },
-        "product_2": { "type": "product", "settings": { "hotspot_horizontal": 60, "hotspot_vertical": 55 } },
-        "product_3": { "type": "product", "settings": { "hotspot_horizontal": 72, "hotspot_vertical": 30 } },
-        "product_4": { "type": "product", "settings": { "hotspot_horizontal": 55, "hotspot_vertical": 22 } },
-        "product_5": { "type": "product", "settings": { "hotspot_horizontal": 52, "hotspot_vertical": 20 } },
-        "product_6": { "type": "product", "settings": { "hotspot_horizontal": 78, "hotspot_vertical": 58 } }
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 62,
+            "hotspot_vertical": 68
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 60,
+            "hotspot_vertical": 55
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 72,
+            "hotspot_vertical": 30
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 55,
+            "hotspot_vertical": 22
+          }
+        },
+        "product_5": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 52,
+            "hotspot_vertical": 20
+          }
+        },
+        "product_6": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "hotspot_horizontal": 78,
+            "hotspot_vertical": 58
+          }
+        }
       },
       "block_order": [
         "product_1",
@@ -22,8 +88,16 @@
         "product_5",
         "product_6"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "Tisso vison in the wild",
+        "companion_handle": "dark-winter-jacket",
+        "companion_color": "Black",
+        "companion_size": "M"
+      }
     }
   },
-  "order": ["gift_guide_banner", "gift_guide_grid"]
+  "order": [
+    "gift_guide_banner",
+    "gift_guide_grid"
+  ]
 }
