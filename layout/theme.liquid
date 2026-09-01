@@ -330,7 +330,19 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {%- comment -%}
+      The Gift Guide page is a standalone, pixel-perfect layout that has its own
+      top bar and no site footer, so the Dawn header and footer groups are
+      skipped for it. Remove this condition to restore them.
+    {%- endcomment -%}
+    {%- assign gift_guide_layout = false -%}
+    {%- if template.name == 'page' and template.suffix == 'gift-guide' -%}
+      {%- assign gift_guide_layout = true -%}
+    {%- endif -%}
+
+    {%- unless gift_guide_layout -%}
+      {% sections 'header-group' %}
+    {%- endunless -%}
 
     <main
       id="MainContent"
@@ -342,7 +354,9 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {%- unless gift_guide_layout -%}
+      {% sections 'footer-group' %}
+    {%- endunless -%}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

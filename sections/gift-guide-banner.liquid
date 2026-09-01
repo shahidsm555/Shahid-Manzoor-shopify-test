@@ -1,0 +1,166 @@
+{% comment %}
+  Gift Guide banner
+  -----------------
+  Custom section built from scratch for the test (no Dawn sections or snippets reused).
+
+  Layout
+    1. Top bar   logo, tagline and a call-to-action button. Collapses to a hamburger
+                 menu on mobile.
+    2. Hero      background illustration with a heading, paragraph and a second button.
+    3. Strip     a single line of small uppercase text.
+
+  Every piece of copy is a theme setting so it can be edited from the customizer.
+{% endcomment %}
+
+{{ 'gift-guide-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gift-guide-banner.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign s = section.settings
+  assign menu_id = 'gg-banner-menu-' | append: section.id
+  assign bg_alt = s.heading
+  if s.background_image != blank and s.background_image.alt != blank
+    assign bg_alt = s.background_image.alt
+  endif
+-%}
+
+<section
+  class="gg-banner"
+  data-gg-banner
+  style="
+    --gg-topbar-bg: {{ s.topbar_background }};
+    --gg-accent: {{ s.accent_color }};
+    --gg-text: {{ s.text_color }};
+    --gg-hero-min-height: {{ s.hero_min_height }}px;
+  "
+>
+  {%- comment -%} 1. Top bar {%- endcomment -%}
+  <header class="gg-banner__bar">
+    <button
+      type="button"
+      class="gg-banner__toggle"
+      aria-expanded="false"
+      aria-controls="{{ menu_id }}"
+      aria-label="Menu"
+      data-gg-toggle
+    >
+      <span class="gg-banner__toggle-line"></span>
+      <span class="gg-banner__toggle-line"></span>
+      <span class="gg-banner__toggle-line"></span>
+    </button>
+
+    {%- if s.logo_text != blank -%}
+      <span class="gg-banner__logo">{{ s.logo_text }}</span>
+    {%- endif -%}
+
+    <div class="gg-banner__collapse" id="{{ menu_id }}" data-gg-menu>
+      {%- if s.topbar_text != blank -%}
+        <p class="gg-banner__tagline">{{ s.topbar_text }}</p>
+      {%- endif -%}
+
+      {%- if s.topbar_button_label != blank -%}
+        <a
+          class="gg-btn gg-btn--accent gg-banner__topbar-cta"
+          href="{{ s.topbar_button_link | default: '#' }}"
+        >
+          <span class="gg-btn__label">{{ s.topbar_button_label }}</span>
+          <span class="gg-btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- comment -%} 2. Hero {%- endcomment -%}
+  <div class="gg-banner__hero">
+    {%- if s.background_image != blank -%}
+      <div class="gg-banner__media">
+        {{
+          s.background_image
+          | image_url: width: 3000
+          | image_tag:
+            loading: 'eager',
+            sizes: '100vw',
+            widths: '750, 1100, 1500, 2000, 3000',
+            class: 'gg-banner__image',
+            alt: bg_alt
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="gg-banner__content">
+      {%- if s.heading != blank -%}
+        <h2 class="gg-banner__heading">{{ s.heading }}</h2>
+      {%- endif -%}
+
+      {%- if s.body_text != blank -%}
+        <div class="gg-banner__text">{{ s.body_text }}</div>
+      {%- endif -%}
+
+      {%- if s.hero_button_label != blank -%}
+        <a
+          class="gg-btn gg-banner__hero-cta"
+          href="{{ s.hero_button_link | default: '#' }}"
+        >
+          <span class="gg-btn__label">{{ s.hero_button_label }}</span>
+          <span class="gg-btn__arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} 3. Strip {%- endcomment -%}
+  {%- if s.strip_text != blank -%}
+    <p class="gg-banner__strip">{{ s.strip_text }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Gift Guide banner",
+  "tag": "section",
+  "class": "gg-banner-section",
+  "settings": [
+    { "type": "header", "content": "Top bar" },
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "TISSO VISON" },
+    { "type": "text", "id": "topbar_text", "label": "Tagline", "default": "Find the ideal gift for your loved ones." },
+    { "type": "text", "id": "topbar_button_label", "label": "Button label", "default": "CHOOSE GIFT" },
+    { "type": "url", "id": "topbar_button_link", "label": "Button link" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "background_image", "label": "Background illustration" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Gift Guide" },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Paragraph",
+      "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>"
+    },
+    { "type": "text", "id": "hero_button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "hero_button_link", "label": "Button link" },
+    {
+      "type": "range",
+      "id": "hero_min_height",
+      "min": 360,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "label": "Hero minimum height",
+      "default": 640
+    },
+
+    { "type": "header", "content": "Strip" },
+    {
+      "type": "text",
+      "id": "strip_text",
+      "label": "Strip text",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "topbar_background", "label": "Top bar and strip background", "default": "#ededed" },
+    { "type": "color", "id": "accent_color", "label": "Accent (button) colour", "default": "#f2ea00" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#1a1a1a" }
+  ],
+  "presets": [{ "name": "Gift Guide banner" }]
+}
+{% endschema %}
