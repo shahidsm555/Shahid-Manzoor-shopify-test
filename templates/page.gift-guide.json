@@ -35,6 +35,7 @@
           "type": "product",
           "settings": {
             "product": "",
+            "image": "shopify://shop_images/black-bag-over-the-shoulder_925x_4cae5708-5e9e-4e7e-96ec-9649f0c20cd8.jpg",
             "hotspot_horizontal": 62,
             "hotspot_vertical": 68
           }
