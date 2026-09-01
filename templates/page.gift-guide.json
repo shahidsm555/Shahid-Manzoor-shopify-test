@@ -34,7 +34,7 @@
         "product_1": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "black-leather-bag",
             "image": "shopify://shop_images/black-bag-over-the-shoulder_925x_4cae5708-5e9e-4e7e-96ec-9649f0c20cd8.jpg",
             "hotspot_horizontal": 62,
             "hotspot_vertical": 68
@@ -43,7 +43,8 @@
         "product_2": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "blue-silk-tuxedo",
+            "image": "shopify://shop_images/man-adjusts-blue-tuxedo-bowtie_925x_55a49e12-d54b-488e-b7a0-ea4c201eb01f.jpg",
             "hotspot_horizontal": 60,
             "hotspot_vertical": 55
           }
@@ -51,7 +52,8 @@
         "product_3": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "chequered-red-shirt",
+            "image": "shopify://shop_images/red-plaid-shirt_925x_70e9e5a8-8fc5-4d60-9a9a-cc2e0dd57cc9.jpg",
             "hotspot_horizontal": 72,
             "hotspot_vertical": 30
           }
@@ -59,7 +61,7 @@
         "product_4": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "classic-leather-jacket",
             "hotspot_horizontal": 55,
             "hotspot_vertical": 22
           }
@@ -67,7 +69,7 @@
         "product_5": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "classic-varsity-top",
             "hotspot_horizontal": 52,
             "hotspot_vertical": 20
           }
@@ -75,7 +77,7 @@
         "product_6": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "dark-denim-top",
             "hotspot_horizontal": 78,
             "hotspot_vertical": 58
           }
